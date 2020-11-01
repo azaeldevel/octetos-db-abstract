@@ -1,5 +1,5 @@
 
-AC_INIT(octetos-db-abstract, 0.1.0-alpha)
+AC_INIT(octetos-db-abstract, 0.1.2-alpha)
 
 AC_CONFIG_HEADERS([config.h])
 
@@ -19,7 +19,7 @@ AC_PROG_LIBTOOL
 LT_INIT
 
 
-PKG_CHECK_MODULES(OCTETOS_CORE, [octetos-core ])
+PKG_CHECK_MODULES(OCTETOS_CORE, octetos-core)
 
 
 

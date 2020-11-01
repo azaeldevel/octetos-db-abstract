@@ -5,9 +5,9 @@ datarootdir=@datarootdir@
 datadir=@datadir@
 includedir=@prefix@/include
 
-Name: octetos-db
+Name: octetos-db-abstract
 Description: C++ library for Database Access database, abstract component.
 Version: @VERSION@
-Requires: 
+Requires: octetos-core
 Libs: -L${libdir} -loctetos-db-abstract
 Cflags: -I${includedir}
