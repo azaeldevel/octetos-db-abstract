@@ -35,7 +35,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 
 [Files]
-Source: "bin/Debug/liboctetos-core.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "bin/Debug/liboctetos-db-abstract.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "../../core/bin/Debug/liboctetos-core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "../abstract/bin/Debug/liboctetos-db-abstract.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 

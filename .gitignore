@@ -15,4 +15,5 @@ install-sh
 ltmain.sh
 missing
 octetos_db_abstract.anjuta
-
+*.depend
+*.layout
