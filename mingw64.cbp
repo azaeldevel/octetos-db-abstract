@@ -27,9 +27,6 @@
 					<Add library="C:/msys64/mingw64/lib/libconfig++.a" />
 					<Add library="C:/msys64/mingw64/lib/libconfig++.dll.a" />
 				</Linker>
-				<ExtraCommands>
-					<Add after="cmd /c cp ../../core/$(TARGET_OUTPUT_DIR)liboctetos-core.dll $(TARGET_OUTPUT_DIR)" />
-				</ExtraCommands>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/liboctetos-db-abstract" prefix_auto="1" extension_auto="1" />
