@@ -2,8 +2,11 @@
 #define OCTETOS_CLIENTDB_HH
 
 
-#include <octetos/core/Artifact.hh>
-#include <octetos/core/Error.hh>
+#if defined WINDOWS_MINGW
+    #include <Artifact.hh>
+#else
+    #include <octetos/core/Artifact.hh>
+#endif
 #include <vector>
 #include <string>
 
@@ -11,7 +14,7 @@ namespace octetos
 {
 namespace db
 {
-	typedef void*  Handler;
+	typedef void* Handler;
 	typedef Handler Connection;
 	typedef Handler Result;
 
@@ -22,14 +25,14 @@ namespace db
 		UnknowError = core::Error::ROOFCODE,
 		ErrorConection
 	};
-	
+
 	/**
 	 * \brief retorna la informacion del paquete usese ne lugar getPakageVersion y getPakageName
 	 **/
 	bool getPackageInfo(core::Artifact&);
-	
-	
-	class SQLException : public core::Error
+
+
+	class DECLSPCE_DLL SQLException : public core::Error
 	{
 	public:
 		virtual ~SQLException() throw();
@@ -38,28 +41,28 @@ namespace db
 	private:
 		//std::string description;
 	};
-	class SQLExceptionConnection : public SQLException
+	class DECLSPCE_DLL SQLExceptionConnection : public SQLException
 	{
 	public:
 		virtual ~SQLExceptionConnection() throw();
 		SQLExceptionConnection(const std::string& description) throw();
 		SQLExceptionConnection(const std::string& description, int code) throw();
 	};
-	class SQLExceptionQuery : public SQLException
+	class DECLSPCE_DLL SQLExceptionQuery : public SQLException
 	{
 	public:
 		virtual ~SQLExceptionQuery() throw();
 		SQLExceptionQuery(const std::string& description) throw();
 		SQLExceptionQuery(const std::string& description, int code) throw();
 	};
-	class NotSupportedExcetion  : public SQLException
+	class DECLSPCE_DLL NotSupportedExcetion  : public SQLException
 	{
 	public:
 		virtual ~NotSupportedExcetion() throw();
 		NotSupportedExcetion(const std::string& description) throw();
-		NotSupportedExcetion(const std::string& description, int code) throw();		
+		NotSupportedExcetion(const std::string& description, int code) throw();
 	};
-    
+
 	enum Driver
 	{
 		Unknow,
@@ -69,13 +72,13 @@ namespace db
 	};
 	const char* getDriverString(Driver);
 
-   	class Datconnect : public core::Object
+   	class DECLSPCE_DLL Datconnect : public core::Object
 	{
 	public:
    		Datconnect(Driver serverType,const std::string& host, unsigned int port,const std::string& database,const std::string& user,const std::string& password);
    		Datconnect(const Datconnect&);
 		Datconnect();
-		            
+
 		virtual std::string toString()const;
 		const std::string& getHost()const;
 		const std::string& getUser()const;
@@ -89,25 +92,25 @@ namespace db
 		void setDatabase(const std::string&);
 		void setPort(unsigned int);
         void set(Driver serverType,const std::string& host, unsigned int port,const std::string& database,const std::string& usuario,const std::string& password);
-		
+
 		bool write(const std::string&);
 		bool read(const std::string&);
-            
+
 	private:
 		Driver driver;
 		std::string host;
 		std::string user;
 		std::string password;
 		std::string database;
-		unsigned int port;        
-	};		
-        
-        
-	class Datresult : public core::Object
+		unsigned int port;
+	};
+
+
+	class DECLSPCE_DLL Datresult : public core::Object
 	{
 	protected:
 		Result result;
-    	
+
 	public:
 		Datresult(void* result);
 		Datresult();
@@ -144,8 +147,8 @@ namespace db
 		virtual double getdouble(const std::string&)const = 0;
 		virtual std::string getString(const std::string&)const = 0;
 	};
-        
-	class Connector : public core::Object
+
+	class DECLSPCE_DLL Connector : public core::Object
 	{
 	protected:
 		Connection conn;
@@ -153,7 +156,7 @@ namespace db
 
 	protected:
 		//void setConnecion(Connection,const Datconnect*);
-            
+
 	public:
 		//
 		static bool is_ipv4_address(const std::string& str);
@@ -162,19 +165,19 @@ namespace db
 		virtual ~Connector();
 		Connector();
 		Connection getConnection()const;
-		const Datconnect* getDatconection() const; 
+		const Datconnect* getDatconection() const;
 		const Connector& operator=(const Connector& obj);
 		//
-		virtual bool connect(const Datconnect& connector)  = 0;            
-		virtual bool execute(const std::string& str,Datresult&) = 0;  
-		virtual RowNumber insert(const std::string&,Datresult&) = 0;         
+		virtual bool connect(const Datconnect& connector)  = 0;
+		virtual bool execute(const std::string& str,Datresult&) = 0;
+		virtual RowNumber insert(const std::string&,Datresult&) = 0;
 		virtual bool select(const std::string& str,Datresult&) = 0;
 		virtual RowNumber update(const std::string&,Datresult&) = 0;
 		virtual RowNumber remove(const std::string&,Datresult&) = 0;
 		virtual bool commit() = 0;
 		virtual bool begin() = 0;
 		virtual bool rollback() = 0;
-		virtual void close() = 0; 
+		virtual void close() = 0;
 		virtual core::Semver getVerionServer() const = 0;
 	};
 

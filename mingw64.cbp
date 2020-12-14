@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="octetos-db-abstract" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/liboctetos-db-abstract" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-DWINDOWS_MINGW" />
+					<Add option="-DBUILDING_DLL" />
+					<Add option="-DCODEBLOCKS" />
+					<Add directory="../../core/src" />
+				</Compiler>
+				<Linker>
+					<Add option="-lws2_32" />
+					<Add option="-lwsock32" />
+					<Add library="../../core/bin/Debug/liboctetos-core.dll" />
+					<Add library="C:/msys64/mingw64/lib/libconfig++.a" />
+					<Add library="C:/msys64/mingw64/lib/libconfig++.dll.a" />
+				</Linker>
+				<ExtraCommands>
+					<Add after="cmd /c cp ../../core/$(TARGET_OUTPUT_DIR)liboctetos-core.dll $(TARGET_OUTPUT_DIR)" />
+				</ExtraCommands>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/liboctetos-db-abstract" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="src/clientdb.cc" />
+		<Unit filename="src/clientdb.hh" />
+		<Unit filename="src/config-cb.h" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>
