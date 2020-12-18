@@ -178,7 +178,10 @@ namespace db
         {
                 this->port = port;
         }
-
+		void Datconnect::setAutocommit(bool a)
+	 	{
+			autocommit = a;
+		}
 
 
 
@@ -193,7 +196,10 @@ namespace db
             }
             return "Unknow";
         }
-
+	bool Datconnect::getAutocommit()const
+	{
+		return autocommit;
+	}
 
 
 
@@ -323,11 +329,12 @@ namespace db
         }
         Datconnect::Datconnect(const Datconnect& obj)
         {
-            this->host = obj.host;
-            this->user = obj.user;
-            this->password = obj.password;
-            this->database = obj.database;
-            this->port = obj.port;
+            host = obj.host;
+            user = obj.user;
+            password = obj.password;
+            database = obj.database;
+            port = obj.port;
+			autocommit = obj.autocommit;
         }
 
         Datconnect::Datconnect(TypeServer driver,const std::string& host, unsigned int port,const std::string& database,const std::string& usuario,const std::string& password)
