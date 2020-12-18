@@ -1,5 +1,5 @@
 
-AC_INIT(octetos-db-abstract, 0.3.0-alpha,azael.devel@gmail.com)
+AC_INIT(octetos-db-abstract, 0.4.0-alpha,azael.devel@gmail.com)
 
 AC_CONFIG_HEADERS([config.h])
 
@@ -21,6 +21,8 @@ LT_INIT
 
 PKG_CHECK_MODULES(OCTETOS_CORE, octetos-core)
 
+AM_CONDITIONAL(WITH_MEDIUMWORD, test x"$with_mediumword" = "xyes")
+AC_ARG_WITH([mediumword], AS_HELP_STRING([--with-mediumword], [Define el tamno de los datos usados.]))
 
 
 

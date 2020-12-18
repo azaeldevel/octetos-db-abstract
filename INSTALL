@@ -315,6 +315,8 @@ workaround:
 'configure' Invocation
 ======================
 
+--with-mediumword
+
    'configure' recognizes the following options to control how it
 operates.
 

@@ -40,15 +40,15 @@ namespace db
 	typedef Handler Connection;
 	typedef Handler Result;
 
-#if defined WORD_WITH_HIGH
+#if defined OCTETOS_DB_HIGHWORD
 	typedef unsigned long long RowNumber;
 	typedef long long Integer;
 	typedef unsigned long long FieldNumber;
-#elif defined WORD_WITH_MEDIUM
+#elif defined OCTETOS_DB_MEDIUMWORD
 	typedef unsigned long RowNumber;
 	typedef long Integer;
 	typedef unsigned long FieldNumber;
-#elif defined WORD_WITH_LOW
+#elif defined OCTETOS_DB_LOWWORD
 	typedef unsigned int RowNumber;
 	typedef int Integer;
 	typedef unsigned int FieldNumber;

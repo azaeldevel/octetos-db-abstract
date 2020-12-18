@@ -3,7 +3,12 @@ AUTOMAKE_OPTIONS=foreign 1.4
 
 lib_LTLIBRARIES = liboctetos-db-abstract.la
 
-liboctetos_db_abstract_la_CXXFLAGS = -DWORD_WITH_MEDIUM
+DEFINITIONS = 
+if WITH_MEDIUMWORD
+DEFINITIONS += -DOCTETOS_DB_MEDIUMWORD
+endif
+
+liboctetos_db_abstract_la_CXXFLAGS = $(OCTETOS_CORE_CGLAGS) $(DEFINITIONS)
 liboctetos_db_abstract_la_LIBADD = $(OCTETOS_CORE_LIBS)
 liboctetos_db_abstract_la_SOURCES = clientdb.cc
 
