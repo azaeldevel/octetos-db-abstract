@@ -40,8 +40,20 @@ namespace db
 	typedef Handler Connection;
 	typedef Handler Result;
 
+#if defined WORD_WITH_HIGH
 	typedef unsigned long long RowNumber;
+	typedef long long Integer;
+	typedef unsigned long long FieldNumber;
+#elif defined WORD_WITH_MEDIUM
+	typedef unsigned long RowNumber;
+	typedef long Integer;
+	typedef unsigned long FieldNumber;
+#elif defined WORD_WITH_LOW
+	typedef unsigned int RowNumber;
+	typedef int Integer;
 	typedef unsigned int FieldNumber;
+#endif
+
 	enum ErrorCodes
 	{
 		UnknowError = core::Error::ROOFCODE,
@@ -204,10 +216,10 @@ namespace db
 		//
 		virtual bool connect(const Datconnect& connector)  = 0;
 		virtual bool execute(const std::string& str,Datresult&) = 0;
-		virtual RowNumber insert(const std::string&,Datresult&) = 0;
+		virtual bool insert(const std::string&,Datresult&) = 0;
 		virtual bool select(const std::string& str,Datresult&) = 0;
-		virtual RowNumber update(const std::string&,Datresult&) = 0;
-		virtual RowNumber remove(const std::string&,Datresult&) = 0;
+		virtual bool update(const std::string&,Datresult&) = 0;
+		virtual bool remove(const std::string&,Datresult&) = 0;
 		virtual bool commit() = 0;
 		virtual bool begin() = 0;
 		virtual bool rollback() = 0;
