@@ -1,5 +1,5 @@
 
-AC_INIT(octetos-db-abstract, 0.5.0-alpha,azael.devel@gmail.com)
+AC_INIT(octetos-db-abstract, 0.5.1-alpha,azael.devel@gmail.com)
 
 AC_CONFIG_HEADERS([config.h])
 
@@ -25,10 +25,10 @@ AM_CONDITIONAL(WITH_MEDIUMWORD, test x"$with_mediumword" = "xyes")
 AC_ARG_WITH([mediumword], AS_HELP_STRING([--with-mediumword], [Define el tamno de los datos usados.]))
 
 AM_CONDITIONAL(WITH_HIGHWORD, test x"$with_mediumword" = "xyes")
-AC_ARG_WITH([mediumword], AS_HELP_STRING([--with-mediumword], [Define el tamno de los datos usados.]))
+AC_ARG_WITH([mediumword], AS_HELP_STRING([--with-highword], [Define el tamno de los datos usados.]))
 
 AM_CONDITIONAL(WITH_LOWWORD, test x"$with_mediumword" = "xyes")
-AC_ARG_WITH([mediumword], AS_HELP_STRING([--with-mediumword], [Define el tamno de los datos usados.]))
+AC_ARG_WITH([mediumword], AS_HELP_STRING([--with-lowword], [Define el tamno de los datos usados.]))
 
 
 
