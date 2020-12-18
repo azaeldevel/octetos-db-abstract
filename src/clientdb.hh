@@ -54,12 +54,13 @@ namespace db
 	bool getPackageInfo(core::Artifact&);
 
 
-	class DECLSPCE_DLL SQLException : public core::Error
+	class DECLSPCE_DLL SQLException : public core::Exception
 	{
 	public:
 		virtual ~SQLException() throw();
 		SQLException(const std::string& description) throw();
-		SQLException(const std::string&, int code) throw();
+		SQLException(const std::string&, int code) throw() __attribute__ ((deprecated));
+		SQLException(const std::string& description,const char* fn,int line) throw();
 	private:
 		//std::string description;
 	};
@@ -68,63 +69,74 @@ namespace db
 	public:
 		virtual ~SQLExceptionConnection() throw();
 		SQLExceptionConnection(const std::string& description) throw();
-		SQLExceptionConnection(const std::string& description, int code) throw();
+		SQLExceptionConnection(const std::string& description, int code) throw() __attribute__ ((deprecated));
+		SQLExceptionConnection(const std::string& description,const char* fn,int line) throw();
 	};
 	class DECLSPCE_DLL SQLExceptionQuery : public SQLException
 	{
 	public:
 		virtual ~SQLExceptionQuery() throw();
 		SQLExceptionQuery(const std::string& description) throw();
-		SQLExceptionQuery(const std::string& description, int code) throw();
+		SQLExceptionQuery(const std::string& description, int code) throw() __attribute__ ((deprecated));
+		SQLExceptionQuery(const std::string& description,const char* fn,int line) throw();
 	};
 	class DECLSPCE_DLL NotSupportedExcetion  : public SQLException
 	{
 	public:
 		virtual ~NotSupportedExcetion() throw();
 		NotSupportedExcetion(const std::string& description) throw();
-		NotSupportedExcetion(const std::string& description, int code) throw();
+		NotSupportedExcetion(const std::string& description, int code) throw() __attribute__ ((deprecated));
+		NotSupportedExcetion(const std::string& description,const char* fn,int line) throw();
 	};
 
-	enum Driver
+	enum TypeServer
 	{
 		Unknow,
 		MySQL,
 		PostgreSQL,
 		MariaDB
 	};
-	const char* getDriverString(Driver);
+	typedef TypeServer Driver __attribute__ ((deprecated));
+	const char* getDriverString(TypeServer);
 
    	class DECLSPCE_DLL Datconnect : public core::Object
 	{
 	public:
-   		Datconnect(Driver serverType,const std::string& host, unsigned int port,const std::string& database,const std::string& user,const std::string& password);
+		//contructors
+   		Datconnect(TypeServer serverType,const std::string& host, unsigned int port,const std::string& database,const std::string& user,const std::string& password);
    		Datconnect(const Datconnect&);
 		Datconnect();
 
+		//getter
 		virtual std::string toString()const;
 		const std::string& getHost()const;
 		const std::string& getUser()const;
 		const std::string& getPassword()const;
 		const std::string& getDatabase()const;
-		Driver getDriver()const;
+		TypeServer getDriver()const;
 		unsigned int getPort()const;
+		bool getAutocommit()const;
+
+		//setter
 		void setHost(const std::string&);
 		void setUser(const std::string&);
 		void setPassword(const std::string&);
 		void setDatabase(const std::string&);
 		void setPort(unsigned int);
-        void set(Driver serverType,const std::string& host, unsigned int port,const std::string& database,const std::string& usuario,const std::string& password);
+        void set(TypeServer serverType,const std::string& host, unsigned int port,const std::string& database,const std::string& usuario,const std::string& password);
+		void setAutocommit();
 
 		bool write(const std::string&);
 		bool read(const std::string&);
 
-	private:
-		Driver driver;
+	protected:
+		TypeServer driver;
 		std::string host;
 		std::string user;
 		std::string password;
 		std::string database;
 		unsigned int port;
+		bool autocommit;
 	};
 
 

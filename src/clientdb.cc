@@ -88,21 +88,31 @@ namespace db
         }
 	*/
 
-
-	NotSupportedExcetion::NotSupportedExcetion(const std::string &description,int code) throw() : SQLException(description,code)
+	NotSupportedExcetion::NotSupportedExcetion(const std::string& description,const char* fn,int line) throw() : SQLException(description,fn,line)
 	{
 	}
-	NotSupportedExcetion::NotSupportedExcetion(const std::string &description) throw() : SQLException(description,(int)core::Error::Codes::ERROR_DB_SUPPORTED)
+	NotSupportedExcetion::NotSupportedExcetion(const std::string &description,int code) throw() : SQLException(description)
+	{
+	}
+	NotSupportedExcetion::NotSupportedExcetion(const std::string &description) throw() : SQLException(description)
 	{
 	}
 	NotSupportedExcetion::~NotSupportedExcetion() throw()
 	{
 	}
 
-	SQLExceptionQuery::SQLExceptionQuery(const std::string &description,int code) throw() : SQLException(description,code)
+
+
+
+
+	 
+	SQLExceptionQuery::SQLExceptionQuery(const std::string& description,const char* fn,int line) throw() : SQLException(description,fn,line)
 	{
 	}
-	SQLExceptionQuery::SQLExceptionQuery(const std::string &description) throw() : SQLException(description,(int)core::Error::Codes::ERROR_DB_QUERY)
+	SQLExceptionQuery::SQLExceptionQuery(const std::string &description,int code) throw() : SQLException(description)
+	{
+	}
+	SQLExceptionQuery::SQLExceptionQuery(const std::string &description) throw() : SQLException(description)
 	{
 	}
 	SQLExceptionQuery::~SQLExceptionQuery() throw()
@@ -110,23 +120,28 @@ namespace db
 	}
 
 
-
-	SQLExceptionConnection::SQLExceptionConnection(const std::string &description,int code) throw() : SQLException(description,code)
+	SQLExceptionConnection::SQLExceptionConnection(const std::string& description,const char* fn,int line) throw() : SQLException(description,fn,line)
 	{
 	}
-	SQLExceptionConnection::SQLExceptionConnection(const std::string &description) throw() : SQLException(description,(int)core::Error::Codes::ERROR_DB_CONNECTION)
+	SQLExceptionConnection::SQLExceptionConnection(const std::string &description,int code) throw() : SQLException(description)
+	{
+	}
+	SQLExceptionConnection::SQLExceptionConnection(const std::string &description) throw() : SQLException(description)
 	{
 	}
 	SQLExceptionConnection::~SQLExceptionConnection() throw()
 	{
 	}
 
-
-	SQLException::SQLException(const std::string &d, int code)throw():core::Error(d,code)
+	
+	SQLException::SQLException(const std::string& description,const char* fn,int line) throw() : core::Exception(description,fn,line)
+	{
+	}
+	SQLException::SQLException(const std::string &d, int code)throw():core::Exception(d)
 	{
 		//this->description = description;
 	}
-	SQLException::SQLException(const std::string &d)throw():core::Error(d,(int)core::Error::Codes::ERROR_DB)
+	SQLException::SQLException(const std::string &d)throw():core::Exception(d)
 	{
 		//this->description = description;
 	}
@@ -167,7 +182,7 @@ namespace db
 
 
 
-        const char* getDriverString(Driver driver)
+        const char* getDriverString(TypeServer driver)
         {
             switch(driver)
             {
@@ -253,12 +268,12 @@ namespace db
 
 		return true;
 	}
-        Driver Datconnect::getDriver() const
+        TypeServer Datconnect::getDriver() const
         {
             return driver;
         }
 
-        void Datconnect::set(Driver driver,const std::string& host, unsigned int port,const std::string& database,const std::string& usuario,const std::string& password)
+        void Datconnect::set(TypeServer driver,const std::string& host, unsigned int port,const std::string& database,const std::string& usuario,const std::string& password)
         {
             this->host = host;
             this->user = usuario;
@@ -315,7 +330,7 @@ namespace db
             this->port = obj.port;
         }
 
-        Datconnect::Datconnect(Driver driver,const std::string& host, unsigned int port,const std::string& database,const std::string& usuario,const std::string& password)
+        Datconnect::Datconnect(TypeServer driver,const std::string& host, unsigned int port,const std::string& database,const std::string& usuario,const std::string& password)
         {
             this->host = host;
             this->user = usuario;
