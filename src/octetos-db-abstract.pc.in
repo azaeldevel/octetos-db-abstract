@@ -10,4 +10,4 @@ Description: C++ library for Database Access database, abstract component.
 Version: @VERSION@
 Requires: octetos-core
 Libs: -L${libdir} -loctetos-db-abstract
-Cflags: -I${includedir}
+Cflags: -I${includedir} -DOCTETOS_DB_MEDIUMWORD
