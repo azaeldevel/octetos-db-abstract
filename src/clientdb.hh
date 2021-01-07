@@ -165,6 +165,7 @@ namespace db
 		Result getResult() const;
 		const Datresult& operator = (Result);
 		//retrive data field by index
+		/*		
 		virtual char getchar(FieldNumber field)const = 0;
 		virtual unsigned char getuchar(FieldNumber field)const = 0;
 		virtual short getshort(FieldNumber field)const = 0;
@@ -178,6 +179,7 @@ namespace db
 		virtual float getfloat(FieldNumber field)const = 0;
 		virtual double getdouble(FieldNumber field)const = 0;
 		virtual std::string getString(FieldNumber field)const = 0;
+		*/
 		//retrive data field by name
 		virtual char getchar(const std::string&)const = 0;
 		virtual unsigned char getuchar(const std::string&)const = 0;
