@@ -22,6 +22,23 @@
  *
  * */
 
+#if EXPORTING_OCTETOS_DB_DLL
+	#if _MSC_VER
+		#define OCTETOS_DB_DECLSPCE_DLL __declspec(dllexport)
+	#elif __GNUG__
+		
+	#endif
+#elif IMPORTING_OCTETOS_DB_DLL
+	#if _MSC_VER
+		#define OCTETOS_DB_DECLSPCE_DLL __declspec(dllimport)
+	#elif __GNUG__
+		
+	#endif
+#else
+	#define OCTETOS_DB_DECLSPCE_DLL
+#endif
+
+
 #if defined WINDOWS_MINGW
     #include <Artifact.hh>
 #elif defined LINUX && defined CODEBLOKS
@@ -66,7 +83,7 @@ namespace db
 	bool getPackageInfo(core::Artifact&);
 
 
-	class DECLSPCE_DLL SQLException : public core::Exception
+	class OCTETOS_DB_DECLSPCE_DLL SQLException : public core::Exception
 	{
 	public:
 		virtual ~SQLException() throw();
@@ -76,7 +93,7 @@ namespace db
 	private:
 		//std::string description;
 	};
-	class DECLSPCE_DLL SQLExceptionConnection : public SQLException
+	class OCTETOS_DB_DECLSPCE_DLL SQLExceptionConnection : public SQLException
 	{
 	public:
 		virtual ~SQLExceptionConnection() throw();
@@ -84,7 +101,7 @@ namespace db
 		SQLExceptionConnection(const std::string& description, int code) throw() __attribute__ ((deprecated));
 		SQLExceptionConnection(const std::string& description,const char* fn,int line) throw();
 	};
-	class DECLSPCE_DLL SQLExceptionQuery : public SQLException
+	class OCTETOS_DB_DECLSPCE_DLL SQLExceptionQuery : public SQLException
 	{
 	public:
 		virtual ~SQLExceptionQuery() throw();
@@ -92,7 +109,7 @@ namespace db
 		SQLExceptionQuery(const std::string& description, int code) throw() __attribute__ ((deprecated));
 		SQLExceptionQuery(const std::string& description,const char* fn,int line) throw();
 	};
-	class DECLSPCE_DLL NotSupportedExcetion  : public SQLException
+	class OCTETOS_DB_DECLSPCE_DLL NotSupportedExcetion  : public SQLException
 	{
 	public:
 		virtual ~NotSupportedExcetion() throw();
@@ -111,7 +128,7 @@ namespace db
 	typedef TypeServer Driver __attribute__ ((deprecated));
 	const char* getDriverString(TypeServer);
 
-   	class DECLSPCE_DLL Datconnect : public core::Object
+   	class OCTETOS_DB_DECLSPCE_DLL Datconnect : public core::Object
 	{
 	public:
 		//contructors
@@ -152,7 +169,7 @@ namespace db
 	};
 
 
-	class DECLSPCE_DLL Datresult : public core::Object
+	class OCTETOS_DB_DECLSPCE_DLL Datresult : public core::Object
 	{
 	protected:
 		Result result;
@@ -194,7 +211,7 @@ namespace db
 		virtual std::string getString(const std::string&)const = 0;
 	};
 
-	class DECLSPCE_DLL Connector : public core::Object
+	class OCTETOS_DB_DECLSPCE_DLL Connector : public core::Object
 	{
 	protected:
 		Connection conn;
