@@ -10,14 +10,7 @@ AM_SILENT_RULES([yes])
 AC_PROG_CXX
 AC_PROG_LIBTOOL
 
-
-
-
-
-
-
 LT_INIT
-
 
 PKG_CHECK_MODULES(OCTETOS_CORE, octetos-core)
 
@@ -29,8 +22,6 @@ AC_ARG_WITH([mediumword], AS_HELP_STRING([--with-highword], [Define el tamno de 
 
 AM_CONDITIONAL(WITH_LOWWORD, test x"$with_mediumword" = "xyes")
 AC_ARG_WITH([mediumword], AS_HELP_STRING([--with-lowword], [Define el tamno de los datos usados.]))
-
-
 
 AC_OUTPUT([
 Makefile
