@@ -3,7 +3,7 @@ AUTOMAKE_OPTIONS=foreign 1.4
 
 lib_LTLIBRARIES = liboctetos-db-abstract.la
 
-DEFINITIONS = 
+
 if WITH_MEDIUMWORD
 DEFINITIONS = -DOCTETOS_DB_MEDIUMWORD
 endif

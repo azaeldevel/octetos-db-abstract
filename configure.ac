@@ -1,5 +1,5 @@
 
-AC_INIT(octetos-db-abstract, 0.6.5-alpha,azael.devel@gmail.com)
+AC_INIT(octetos-db-abstract, 0.6.6-alpha,azael.devel@gmail.com)
 
 AC_CONFIG_HEADERS([config.h])
 
