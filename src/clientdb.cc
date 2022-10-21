@@ -288,6 +288,14 @@ namespace db
             this->port = port;
             this->driver = driver;
         }
+        void Datconnect::set(const std::string& host, unsigned int port,const std::string& database,const std::string& usuario,const std::string& password)
+        {
+            this->host = host;
+            this->user = usuario;
+            this->password = password;
+            this->database = database;
+            this->port = port;
+        }
         /*const Datconnect& Datconnect::operator=(const Datconnect& obj)
         {
             this->host = obj.host;
@@ -345,6 +353,14 @@ namespace db
             this->database = database;
             this->port = port;
             this->driver = driver;
+        }
+        Datconnect::Datconnect(const std::string& host, unsigned int port,const std::string& database,const std::string& usuario,const std::string& password)
+        {
+            this->host = host;
+            this->user = usuario;
+            this->password = password;
+            this->database = database;
+            this->port = port;
         }
 
         const std::string& Datconnect::getHost()const
