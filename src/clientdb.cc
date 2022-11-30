@@ -23,23 +23,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <sstream>
-#if defined WINDOWS_MINGW
+
+#if defined(__linux__)
+    #include "config.h"
+    #include <octetos/core/Error.hh>
+    #include <arpa/inet.h>
+#elif defined(_WIN32) || defined(_WIN64)
+    #include "config-cb.h"
+    #include <Error.hh>
     #include <Ws2tcpip.h>
 #else
-    #include <arpa/inet.h>
-#endif
-#if defined WINDOWS_MINGW
-    #include <Error.hh>
-#else
-    #include <octetos/core/Error.hh>
-#endif
-
-#ifdef HAVE_CONFIG_H
-    #include "config.h"
-#elif defined WINDOWS_MINGW && defined CODEBLOCKS
-    #include "config-cb.h"
-#elif defined LINUX && defined CODEBLOCKS
-    #include "config-cb.h"
+    #error "Plataforma desconocida"
 #endif
 #include "clientdb.hh"
 
@@ -105,7 +99,7 @@ namespace db
 
 
 
-	 
+
 	SQLExceptionQuery::SQLExceptionQuery(const std::string& description,const char* fn,int line) throw() : SQLException(description,fn,line)
 	{
 	}
@@ -133,7 +127,7 @@ namespace db
 	{
 	}
 
-	
+
 	SQLException::SQLException(const std::string& description,const char* fn,int line) throw() : core::Exception(description,fn,line)
 	{
 	}

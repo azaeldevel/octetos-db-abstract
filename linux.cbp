@@ -18,11 +18,14 @@
 					<Add option="-g" />
 					<Add option="-DLINUX" />
 					<Add option="-DCODEBLOCKS" />
-					<Add directory="../../core/src" />
+					<Add option="-DOCTETOS_DB_MEDIUMWORD" />
+					<Add directory="../core/src" />
 				</Compiler>
 				<Linker>
-					<Add option="-loctetos-core" />
-					<Add directory="../../core/bin/Debug" />
+					<Add option="`pkg-config libconfig++ --libs`" />
+					<Add library="octetos-core" />
+					<Add library="Ws2_32" />
+					<Add directory="../core/bin/Debug" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -34,9 +37,14 @@
 				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-DOCTETOS_DB_MEDIUMWORD" />
+					<Add directory="../core/src" />
 				</Compiler>
 				<Linker>
-					<Add option="-s" />
+					<Add option="`pkg-config libconfig++ --libs`" />
+					<Add library="octetos-core" />
+					<Add library="Ws2_32" />
+					<Add directory="../core/bin/Release" />
 				</Linker>
 			</Target>
 		</Build>

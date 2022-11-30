@@ -18,3 +18,5 @@ octetos_db_abstract.anjuta
 *.depend
 *.layout
 *.anjuta
+bin
+obj

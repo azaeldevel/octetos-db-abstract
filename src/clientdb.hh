@@ -26,26 +26,27 @@
 	#if _MSC_VER
 		#define OCTETOS_DB_DECLSPCE_DLL __declspec(dllexport)
 	#elif __GNUG__
-		
+
 	#endif
 #elif IMPORTING_OCTETOS_DB_DLL
 	#if _MSC_VER
 		#define OCTETOS_DB_DECLSPCE_DLL __declspec(dllimport)
 	#elif __GNUG__
-		
+
 	#endif
 #else
 	#define OCTETOS_DB_DECLSPCE_DLL
 #endif
 
-
-#if defined WINDOWS_MINGW
-    #include <Artifact.hh>
-#elif defined LINUX && defined CODEBLOKS
-    #include <Artifact.hh>
-#else
+#if defined(__linux__)
     #include <octetos/core/Artifact.hh>
+#elif defined(_WIN32) || defined(_WIN64)
+    #include <Artifact.hh>
+    #include "ws2tcpip.h"
+#else
+    #error "Plataforma desconocida"
 #endif
+
 #include <vector>
 #include <string>
 
