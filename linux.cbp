@@ -7,19 +7,16 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/octetos-db-abstract" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/octetos-db-abstract.dll" prefix_auto="0" extension_auto="0" />
 				<Option object_output="obj/Debug/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option createDefFile="1" />
-				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-fPIC" />
 					<Add option="-g" />
-					<Add option="-DLINUX" />
-					<Add option="-DCODEBLOCKS" />
+					<Add option="-DMSYS2" />
 					<Add option="-DOCTETOS_DB_MEDIUMWORD" />
-					<Add directory="../core/src" />
+					<Add directory="../../octetos" />
 				</Compiler>
 				<Linker>
 					<Add option="`pkg-config libconfig++ --libs`" />
@@ -38,7 +35,8 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-DOCTETOS_DB_MEDIUMWORD" />
-					<Add directory="../core/src" />
+					<Add option="-DMSYS2" />
+					<Add directory="../../octetos" />
 				</Compiler>
 				<Linker>
 					<Add option="`pkg-config libconfig++ --libs`" />

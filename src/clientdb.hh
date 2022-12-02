@@ -40,6 +40,9 @@
 
 #if defined(__linux__)
     #include <octetos/core/Artifact.hh>
+#elif MSYS2
+    #include <core/src/Artifact.hh>
+    #include "ws2tcpip.h"
 #elif defined(_WIN32) || defined(_WIN64)
     #include <Artifact.hh>
     #include "ws2tcpip.h"

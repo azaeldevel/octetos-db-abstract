@@ -28,10 +28,12 @@
     #include "config.h"
     #include <octetos/core/Error.hh>
     #include <arpa/inet.h>
+#elif MSYS2
+    #include "config-cb.h"
+    #include <core/src/Error.hh>
 #elif defined(_WIN32) || defined(_WIN64)
     #include "config-cb.h"
     #include <Error.hh>
-    #include <Ws2tcpip.h>
 #else
     #error "Plataforma desconocida"
 #endif
