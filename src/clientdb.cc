@@ -24,19 +24,7 @@
 #include <string.h>
 #include <sstream>
 
-#if defined(__linux__)
-    #include "config.h"
-    #include <octetos/core/Error.hh>
-    #include <arpa/inet.h>
-#elif MSYS2
-    #include "config-cb.h"
-    #include <core/src/Error.hh>
-#elif defined(_WIN32) || defined(_WIN64)
-    #include "config-cb.h"
-    #include <Error.hh>
-#else
-    #error "Plataforma desconocida"
-#endif
+
 #include "clientdb.hh"
 
 namespace octetos
@@ -189,6 +177,8 @@ namespace db
                     return "MySQL";
                 case PostgreSQL:
                     return "PostgreSQL";
+				default:
+					;
             }
             return "Unknow";
         }
@@ -198,78 +188,6 @@ namespace db
 	}
 
 
-
-
-
-
-	bool Datconnect::read(const std::string& file)
-	{
-  		libconfig::Config cfg;
-
-	  	// Read the file. If there is an error, report it and exit.
-	  	try
-	  	{
-			cfg.readFile(file.c_str());
-	  	}
-	  	catch(const libconfig::FileIOException &fioex)
-	  	{
-			return false;
-	  	}
-	  	catch(const libconfig::ParseException &pex)
-	  	{
-			return false;
-	  	}
-
-		/*try
-  		{
-    		std::string name = cfg.lookup("name");
-  		}
-  		catch(const libconfig::SettingNotFoundException &nfex)
-  		{
-			return false;
-  		}*/
-
-		const libconfig::Setting& root = cfg.getRoot();
-
-		//driver = (const std::string&)root["Datconnect"]["driver"];
-
-		host = (const std::string&)root["Datconnect"]["host"];
-		user = (const std::string&)root["Datconnect"]["user"];
-		password = (const std::string&)root["Datconnect"]["password"];
-		database = (const std::string&)root["Datconnect"]["database"];
-		port = (int)root["Datconnect"]["port"];
-
-		return false;
-	}
-	bool Datconnect::write(const std::string& file)
-	{
-  		libconfig::Config cfg;
-	  	libconfig::Setting &root = cfg.getRoot();
-	  	libconfig::Setting &datconn = root.add("Datconnect", libconfig::Setting::TypeGroup);
-
-	  	datconn.add("driver", libconfig::Setting::TypeString) = getDriverString(driver);
-	  	datconn.add("host", libconfig::Setting::TypeString) = host;
-	  	datconn.add("user", libconfig::Setting::TypeString) = user;
-	  	datconn.add("password", libconfig::Setting::TypeString) = password;
-	  	datconn.add("database", libconfig::Setting::TypeString) = database;
-		datconn.add("port", libconfig::Setting::TypeInt) = (int)port;
-
-		try
-		{
-			cfg.writeFile(file.c_str());
-		}
-		catch(libconfig::FileIOException ex)
-		{
-			return false;
-		}
-		catch(libconfig::SettingTypeException ex)
-		{
-			return false;
-		}
-
-
-		return true;
-	}
         TypeServer Datconnect::getDriver() const
         {
             return driver;
@@ -523,25 +441,6 @@ namespace db
 
 
 
-
-	bool getPackageInfo(core::Artifact& packinfo)
-	{
-		packinfo.name = PACKAGE;
-		packinfo.brief = "Libreria para Base de Dato de Octetos";
-		packinfo.url = "https://github.com/azaeldevel/octetos-db.git";
-		if(!packinfo.version.set(VERSION))
-		{
-			return false;
-		}
-
-		packinfo.licence.type = core::Licence::Type::GPL;
-		packinfo.licence.name_public = packinfo.name;
-		packinfo.licence.owner = "Azael Reyes";
-		packinfo.licence.year = 2019;
-        packinfo.licence.contact = "azael.devel@gmail.com";
-
-		return true;
-	}
 
 }
 }

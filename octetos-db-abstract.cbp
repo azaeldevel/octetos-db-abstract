@@ -14,14 +14,14 @@
 				<Compiler>
 					<Add option="-fPIC" />
 					<Add option="-g" />
+					<Add option="`pkg-config --libs octetos-core`" />
 					<Add option="-DMSYS2" />
 					<Add option="-DOCTETOS_DB_MEDIUMWORD" />
+					<Add option="-DIDE_CODEBLOCKS" />
 					<Add directory="../../octetos" />
 				</Compiler>
 				<Linker>
-					<Add option="`pkg-config libconfig++ --libs`" />
-					<Add library="octetos-core" />
-					<Add library="Ws2_32" />
+					<Add option="`pkg-config --cflgas octetos-core`" />
 					<Add directory="../core/bin/Debug" />
 				</Linker>
 			</Target>

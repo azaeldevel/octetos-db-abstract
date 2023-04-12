@@ -38,14 +38,21 @@
 	#define OCTETOS_DB_DECLSPCE_DLL
 #endif
 
-#if defined(__linux__)
-    #include <octetos/core/Artifact.hh>
+#if defined(__linux__) && defined IDE_CODEBLOCKS
+    #include "config-cb.h"
+    #include <octetos/core/Version.hh>
+    #include <octetos/core/Error.hh>
+    #include <arpa/inet.h>
+#elif  defined(__linux__)
+    #include "config.h"
+    #include <octetos/core/Error.hh>
+    #include <arpa/inet.h>
 #elif MSYS2
-    #include <core/src/Artifact.hh>
-    #include "ws2tcpip.h"
+    #include "config-cb.h"
+    #include <core/src/Error.hh>
 #elif defined(_WIN32) || defined(_WIN64)
-    #include <Artifact.hh>
-    #include "ws2tcpip.h"
+    #include "config-cb.h"
+    #include <Error.hh>
 #else
     #error "Plataforma desconocida"
 #endif
@@ -81,13 +88,8 @@ namespace db
 		ErrorConection
 	};
 
-	/**
-	 * \brief retorna la informacion del paquete usese ne lugar getPakageVersion y getPakageName
-	 **/
-	bool getPackageInfo(core::Artifact&);
 
-
-	class OCTETOS_DB_DECLSPCE_DLL SQLException : public core::Exception
+	class SQLException : public core::Exception
 	{
 	public:
 		virtual ~SQLException() throw();
@@ -97,7 +99,7 @@ namespace db
 	private:
 		//std::string description;
 	};
-	class OCTETOS_DB_DECLSPCE_DLL SQLExceptionConnection : public SQLException
+	class SQLExceptionConnection : public SQLException
 	{
 	public:
 		virtual ~SQLExceptionConnection() throw();
@@ -105,7 +107,7 @@ namespace db
 		SQLExceptionConnection(const std::string& description, int code) throw() __attribute__ ((deprecated));
 		SQLExceptionConnection(const std::string& description,const char* fn,int line) throw();
 	};
-	class OCTETOS_DB_DECLSPCE_DLL SQLExceptionQuery : public SQLException
+	class SQLExceptionQuery : public SQLException
 	{
 	public:
 		virtual ~SQLExceptionQuery() throw();
@@ -113,7 +115,7 @@ namespace db
 		SQLExceptionQuery(const std::string& description, int code) throw() __attribute__ ((deprecated));
 		SQLExceptionQuery(const std::string& description,const char* fn,int line) throw();
 	};
-	class OCTETOS_DB_DECLSPCE_DLL NotSupportedExcetion  : public SQLException
+	class NotSupportedExcetion  : public SQLException
 	{
 	public:
 		virtual ~NotSupportedExcetion() throw();
